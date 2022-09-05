@@ -43,7 +43,7 @@ class EnterKey extends StatelessWidget {
     game.updateStatus(GameStatus.submitting);
 
     bool isCorrect = GameService().validate(currentWord, solution);
-    bool isLost = currentIndex == board.length;
+    bool isLost = currentIndex == board.length - 1;
 
     if (isCorrect) {
       handleWon(context);

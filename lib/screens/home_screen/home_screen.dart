@@ -19,10 +19,11 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 2),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
-                  appName.toUpperCase(),
-                  style: const TextStyle(
+                  appName,
+                  style: TextStyle(
+                    fontFamily: 'Beon',
                     fontSize: 48,
                     color: kPurple,
                     letterSpacing: 4,
@@ -34,9 +35,13 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Spacer(),
-                const PlayButton(),
-                const Spacer(),
+                Spacer(),
+                PlayButton(),
+                Spacer(),
+                Text(
+                  'Made by Tad Yuh',
+                  style: TextStyle(fontSize: 24, color: kMediumGrey),
+                )
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceAround,
                 //   children: [

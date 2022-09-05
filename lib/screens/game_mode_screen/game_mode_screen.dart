@@ -41,7 +41,8 @@ class GameModeScreen extends StatelessWidget {
                   const SizedBox(height: kDefaultPadding),
                   GameModeButton(
                     title: 'Online',
-                    subtitle: 'Nhiều người chơi',
+                    subtitle: 'Sắp ra mắt...',
+                    disable: true,
                     onTap: () => Navigator.of(context)
                         .pushReplacementNamed(GameScreen.routeName),
                   ),

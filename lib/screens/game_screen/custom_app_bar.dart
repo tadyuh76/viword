@@ -82,9 +82,9 @@ AppBar renderAppBar(BuildContext context) {
     title: const Text(appName),
     titleTextStyle: const TextStyle(
       fontSize: 28,
-      fontFamily: 'Quicksand',
+      fontFamily: 'Beon',
+      letterSpacing: 4,
       color: kPurple,
-      fontWeight: FontWeight.bold,
       shadows: [Shadow(color: kPurple, blurRadius: 4)],
     ),
     leading: renderBackButton(),

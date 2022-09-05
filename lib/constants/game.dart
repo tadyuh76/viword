@@ -3,7 +3,7 @@ import 'package:viword/models/letter.dart';
 import 'package:viword/models/word.dart';
 import 'package:viword/utils/enums.dart';
 
-const appName = 'ViWordle';
+const appName = 'ViWord';
 const numberOfGuess = 7;
 const kDefaultFont = 'Quicksand';
 
