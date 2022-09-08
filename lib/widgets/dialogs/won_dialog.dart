@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:viword/constants/breakpoints.dart';
 import 'package:viword/constants/colors.dart';
@@ -6,15 +7,29 @@ import 'package:viword/providers/game_provider.dart';
 import 'package:viword/utils/color_changer.dart';
 import 'package:viword/utils/show_snack_bar.dart';
 
-class EndDialog extends StatelessWidget {
-  const EndDialog({Key? key}) : super(key: key);
+class WonDialog extends StatelessWidget {
+  const WonDialog({Key? key}) : super(key: key);
 
   void createNewGame(BuildContext context) {
-    Provider.of<Game>(context).reset();
+    Navigator.of(context).pop();
+
+    context.read<Game>().reset();
     showSnackBar(
       context: context,
       backgroundColor: darken(kWrongAccentColor, 0.05),
       text: 'Đã khởi tạo từ mới',
+    );
+  }
+
+  void copyEmoijsBoardToClipboard(BuildContext context) {
+    final emojisBoard = context.read<Game>().boardToEmojis();
+    // final guess = context.read<Game>().currentIndex;
+    Clipboard.setData(ClipboardData(text: "ViWord\n$emojisBoard"));
+
+    showSnackBar(
+      context: context,
+      backgroundColor: kCorrectColor,
+      text: 'Đã sao chép bàn chơi vào bộ nhớ tạm!',
     );
   }
 
@@ -28,7 +43,7 @@ class EndDialog extends StatelessWidget {
         child: Container(
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-            color: kCorrectColor,
+            color: kDarkGrey,
             borderRadius: BorderRadius.circular(kDefaultPadding),
           ),
           child: Column(
@@ -41,31 +56,35 @@ class EndDialog extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const Text(
-                      'ĐÚNG RỒI!',
+                      'GAME COMPLETE!',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
+                        fontFamily: 'Beon',
+                        color: kCorrectColor,
+                        fontSize: 28,
                         letterSpacing: 2,
                       ),
                     ),
                     const SizedBox(height: kDefaultPadding),
                     _StatisticsItem(
                       text: 'Đáp án',
-                      data: Provider.of<Game>(context, listen: false).solution,
+                      data: context.read<Game>().solution,
                     ),
                     const SizedBox(height: kDefaultPadding / 2),
                     _StatisticsItem(
                       text: 'Số lượt đã đoán',
-                      data: Provider.of<Game>(context, listen: false)
-                          .currentIndex
-                          .toString(),
+                      data: context.read<Game>().currentIndex.toString(),
+                    ),
+                    const SizedBox(height: kDefaultPadding / 2),
+                    Text(
+                      context.read<Game>().boardToEmojis(),
+                      style: const TextStyle(fontSize: 20),
                     ),
                   ],
                 ),
               ),
               Container(
                 height: 80,
-                decoration: BoxDecoration(color: darken(kCorrectColor)),
+                decoration: const BoxDecoration(color: kMediumGrey),
                 child: Row(
                   children: [
                     _CustomIconButton(
@@ -76,11 +95,13 @@ class EndDialog extends StatelessWidget {
                     _CustomIconButton(
                       icon: Icons.repeat_rounded,
                       text: 'Chơi lại',
-                      onTap: () {
-                        Navigator.of(context).pop();
-                        createNewGame(context);
-                      },
+                      onTap: () => createNewGame(context),
                     ),
+                    _CustomIconButton(
+                      icon: Icons.share,
+                      text: 'Chia sẻ',
+                      onTap: () => copyEmoijsBoardToClipboard(context),
+                    )
                   ],
                 ),
               ),

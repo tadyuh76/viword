@@ -21,13 +21,8 @@ class GameService {
       );
 
   String getWordOfTheDay() {
-    // final now = DateTime.now();
-    // final todayInDays = now.difference(DateTime(now.year, 1, 1, 0, 0)).inDays;
-    // return words[todayInDays + (now.year - 2022) * 366];
-
-    final random = Random();
-    final randomIdx = random.nextInt(words.length);
-    debugPrint('Today word is: ${words[randomIdx]}');
+    final randomIdx = Random().nextInt(words.length);
+    debugPrint('Solution is: ${words[randomIdx]}');
     return words[randomIdx];
   }
 

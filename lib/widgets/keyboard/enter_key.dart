@@ -6,7 +6,7 @@ import 'package:viword/providers/game_provider.dart';
 import 'package:viword/services/game_service.dart';
 import 'package:viword/utils/enums.dart';
 import 'package:viword/utils/show_snack_bar.dart';
-import 'package:viword/widgets/dialogs/end_dialog.dart';
+import 'package:viword/widgets/dialogs/won_dialog.dart';
 import 'package:viword/widgets/keyboard/keyboard_key.dart';
 
 class EnterKey extends StatelessWidget {
@@ -66,7 +66,7 @@ class EnterKey extends StatelessWidget {
       const Duration(milliseconds: 1500),
       () => showDialog(
         context: context,
-        builder: (_) => const EndDialog(),
+        builder: (_) => const WonDialog(),
       ),
     );
   }

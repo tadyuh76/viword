@@ -53,6 +53,14 @@ const statusPriority = {
   LetterStatus.correct: 4,
 };
 
+final statusToEmojis = {
+  LetterStatus.correct: "🟩",
+  LetterStatus.wrongAccent: "🟦",
+  LetterStatus.wrongPosition: "🟧",
+  LetterStatus.notInWord: "⬛",
+  LetterStatus.initial: ""
+};
+
 final initBoard = List.generate(
   numberOfGuess,
   (_) => Word(letters: List.generate(6, (_) => Letter.empty())),

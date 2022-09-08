@@ -117,6 +117,20 @@ class Game extends ChangeNotifier {
     notifyListeners();
   }
 
+  String boardToEmojis() {
+    return _board
+        .map((word) {
+          final emojisLine = word.letters
+              .map((letter) => statusToEmojis[letter.status])
+              .toList()
+              .join();
+          return emojisLine;
+        })
+        .toList()
+        .where((line) => line.isNotEmpty)
+        .join("\n");
+  }
+
   void flipOneRow(int rowIndex) {
     final curRow = _flipCardControllers[rowIndex];
 

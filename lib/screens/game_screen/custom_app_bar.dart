@@ -9,7 +9,29 @@ import 'package:viword/utils/show_snack_bar.dart';
 import 'package:viword/widgets/dialogs/exit_dialog.dart';
 import 'package:viword/widgets/dialogs/tutorial_dialog.dart';
 
-AppBar renderAppBar(BuildContext context) {
+class CustomAppBar extends StatefulWidget {
+  final bool showMenu;
+  final VoidCallback displayMenu;
+  const CustomAppBar(
+      {Key? key, required this.showMenu, required this.displayMenu})
+      : super(key: key);
+
+  @override
+  State<CustomAppBar> createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
+  // late AnimationController _controller;
+
+  // @override
+  // initState() {
+  //   _controller = AnimationController(
+  //     vsync: this,
+  //     duration: const Duration(milliseconds: 300),
+  //   );
+  //   super.initState();
+  // }
+
   displayBackDialog() {
     showDialog(
       context: context,
@@ -39,8 +61,8 @@ AppBar renderAppBar(BuildContext context) {
 
   renderResetButton() {
     return _AppBarButton(
-      icon: Icons.repeat,
-      iconSize: 22,
+      icon: Icons.replay,
+      iconSize: 24,
       onTap: () => showDialog(
         context: context,
         builder: (context) => ExitDialog(
@@ -75,24 +97,43 @@ AppBar renderAppBar(BuildContext context) {
     );
   }
 
-  return AppBar(
-    backgroundColor: kBackground,
-    elevation: 3,
-    centerTitle: true,
-    title: const Text(appName),
-    titleTextStyle: const TextStyle(
-      fontSize: 28,
-      fontFamily: 'Beon',
-      letterSpacing: 4,
-      color: kPurple,
-      shadows: [Shadow(color: kPurple, blurRadius: 4)],
-    ),
-    leading: renderBackButton(),
-    actions: [
-      renderResetButton(),
-      renderTutorialButton(),
-    ],
-  );
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: kBackground,
+      elevation: 3,
+      centerTitle: true,
+      title: const Text(appName),
+      titleTextStyle: const TextStyle(
+        fontSize: 28,
+        fontFamily: 'Beon',
+        letterSpacing: 4,
+        color: kPurple,
+        shadows: [Shadow(color: kPurple, blurRadius: 4)],
+      ),
+      leading: renderBackButton(),
+      actions: [
+        renderResetButton(),
+        renderTutorialButton(),
+        // IconButton(
+        //   onPressed: () => setState(() {
+        //     if (widget.showMenu) {
+        //       _controller.reverse();
+        //     } else {
+        //       _controller.forward();
+        //     }
+
+        //     widget.displayMenu();
+        //   }),
+        //   icon: AnimatedIcon(
+        //     icon: AnimatedIcons.menu_close,
+        //     progress: _controller,
+        //     color: kGrey,
+        //   ),
+        // ),
+      ],
+    );
+  }
 }
 
 class _AppBarButton extends StatelessWidget {
