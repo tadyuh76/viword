@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:viword/constants/game.dart';
 import 'package:viword/models/letter.dart';
 import 'package:viword/models/word.dart';
+import 'package:viword/resources/solutions.dart';
 import 'package:viword/resources/words.dart';
 import 'package:viword/utils/enums.dart';
 import 'package:viword/utils/remove_diacritics.dart';
@@ -20,10 +21,10 @@ class GameService {
         (_) => List.generate(6, (_) => FlipCardController()),
       );
 
-  String getWordOfTheDay() {
-    final randomIdx = Random().nextInt(words.length);
-    debugPrint('Solution is: ${words[randomIdx]}');
-    return words[randomIdx];
+  String getNewSolution() {
+    final randomIdx = Random().nextInt(solutions.length);
+    debugPrint('Solution is: ${solutions[randomIdx]}');
+    return solutions[randomIdx];
   }
 
   bool dictionaryHas(Word word) {

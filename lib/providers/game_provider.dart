@@ -11,7 +11,7 @@ import 'package:viword/utils/remove_diacritics.dart';
 
 class Game extends ChangeNotifier {
   final _flipCardControllers = GameService().initFlipCardControllers;
-  var _solution = GameService().getWordOfTheDay();
+  var _solution = GameService().getNewSolution();
   var _board = GameService().initBoard;
   var _currentIndex = 0;
   var _gameStatus = GameStatus.playing;
@@ -157,7 +157,7 @@ class Game extends ChangeNotifier {
   }
 
   void reset() {
-    _solution = GameService().getWordOfTheDay();
+    _solution = GameService().getNewSolution();
     _board = GameService().initBoard;
     _specialKeys = [];
     _currentIndex = 0;
